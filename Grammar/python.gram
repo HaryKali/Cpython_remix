@@ -34,7 +34,7 @@ _PyPegen_parse(Parser *p)
 # * Upper case names (NAME) denote tokens in the Grammar/Tokens file
 # * Rule names starting with "invalid_" are used for specialized syntax errors
 #     - These rules are NOT used in the first pass of the parser.
-#     - Only if the first pass fails to parse, a second pass including the invalid
+#     - Only if the first   fails to parse, a second pass including the invalid
 #       rules will be executed.
 #     - If the parser fails in the second phase with a generic syntax error, the
 #       location of the generic failure of the first pass will be used (this avoids
@@ -110,6 +110,7 @@ simple_stmts[asdl_stmt_seq*]:
 
 # NOTE: assignment MUST precede expression, else parsing a simple assignment
 # will throw a SyntaxError.
+#AKA:small_stmt`
 simple_stmt[stmt_ty] (memo):
     | assignment
     | &"type" type_alias
@@ -117,7 +118,7 @@ simple_stmt[stmt_ty] (memo):
     | &'return' return_stmt
     | &('import' | 'from') import_stmt
     | &'raise' raise_stmt
-    | ('pass'|'proceed'){ _PyAST_Pass(EXTRA) }
+    | ('pass'|'proceed'|'skip'){ _PyAST_Pass(EXTRA) }
     | &'del' del_stmt
     | &'yield' yield_stmt
     | &'assert' assert_stmt

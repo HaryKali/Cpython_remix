@@ -48,6 +48,7 @@ kwlist = [
     'proceed',
     'raise',
     'return',
+    'skip',
     'try',
     'while',
     'with',
