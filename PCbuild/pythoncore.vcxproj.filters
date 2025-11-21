@@ -60,9 +60,6 @@
     <ClInclude Include="..\Include\ceval.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\code.h">
-      <Filter>Include</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\codecs.h">
       <Filter>Include</Filter>
     </ClInclude>
@@ -324,9 +321,6 @@
     <ClInclude Include="..\PC\errmap.h">
       <Filter>PC</Filter>
     </ClInclude>
-    <ClInclude Include="..\PC\pyconfig.h">
-      <Filter>PC</Filter>
-    </ClInclude>
     <ClInclude Include="..\Python\stdlib_module_names.h">
       <Filter>Python</Filter>
     </ClInclude>
@@ -453,13 +447,7 @@
     <ClInclude Include="..\Include\cpython\pyatomic.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\cpython\pyatomic_gcc.h">
-      <Filter>Include</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\cpython\pyatomic_msc.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\cpython\pyatomic_std.h">
       <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\cpython\pyctype.h">
@@ -894,6 +882,10 @@
     <ClInclude Include="..\Include\internal\pycore_structseq.h">
       <Filter>Include\internal</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\internal\pycore_backoff.h" />
+    <ClInclude Include="..\Include\internal\pycore_cfg.h" />
+    <ClInclude Include="..\Include\opcode.h" />
+    <ClInclude Include="..\PC\pyconfig.h.in" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Modules\_abc.c">
@@ -1106,9 +1098,6 @@
     <ClCompile Include="..\Objects\abstract.c">
       <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="..\Objects\accu.c">
-      <Filter>Objects</Filter>
-    </ClCompile>
     <ClCompile Include="..\Objects\boolobject.c">
       <Filter>Objects</Filter>
     </ClCompile>
@@ -1298,9 +1287,6 @@
     <ClCompile Include="..\Python\critical_section.c">
       <Filter>Python</Filter>
     </ClCompile>
-    <ClCompile Include="..\Python\crossinterp.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\Python\dynamic_annotations.c">
       <Filter>Python</Filter>
     </ClCompile>
@@ -1370,23 +1356,8 @@
     <ClCompile Include="..\Python\interpconfig.c">
       <Filter>Python</Filter>
     </ClCompile>
-    <ClCompile Include="..\Python\intrinsics.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Python\instruction_sequence.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Python\instrumentation.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\Python\jit.c">
       <Filter>Python</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Python\legacy_tracing.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Python\lock.c">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Python\marshal.c">
       <Filter>Python</Filter>
@@ -1610,6 +1581,12 @@
     <ClCompile Include="..\Modules\getbuildinfo.c">
       <Filter>Modules</Filter>
     </ClCompile>
+    <ClCompile Include="..\Python\crossinterp.c" />
+    <ClCompile Include="..\Python\intrinsics.c" />
+    <ClCompile Include="..\Python\instruction_sequence.c" />
+    <ClCompile Include="..\Python\instrumentation.c" />
+    <ClCompile Include="..\Python\legacy_tracing.c" />
+    <ClCompile Include="..\Python\lock.c" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\PC\python_nt.rc">

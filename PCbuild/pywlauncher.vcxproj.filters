@@ -11,7 +11,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\PC\launcher.c">
+    <ClCompile Include="..\PC\launcher2.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

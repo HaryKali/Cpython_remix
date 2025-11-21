@@ -18,13 +18,7 @@
     <ClCompile Include="..\Modules\_testcapi\vectorcall.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Modules\_testcapi\vectorcall_limited.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\Modules\_testcapi\heaptype.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Modules\_testcapi\heaptype_relative.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Modules\_testcapi\abstract.c">
@@ -111,6 +105,7 @@
     <ClCompile Include="..\Modules\_testcapi\monitoring.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\Modules\_testcapi\immortal.c" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\PC\python_nt.rc">

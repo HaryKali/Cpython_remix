@@ -78,6 +78,54 @@
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='PGUpdate|x64'">
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='PGUpdate|ARM'">
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='PGUpdate|Win32'">
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='PGUpdate|ARM64'">
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='PGInstrument|ARM'">
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='PGInstrument|x64'">
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='PGInstrument|ARM64'">
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='PGInstrument|Win32'">
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -428,7 +476,6 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-
   <!-- Direct copy from pythoncore.vcxproj, but this one is only used for our
        own build. All other extension modules will use the copy that pythoncore
        generates. -->
@@ -448,35 +495,21 @@
       <PyConfigHText>$(PyConfigHText.Replace('#undef Py_GIL_DISABLED', '#define Py_GIL_DISABLED 1'))</PyConfigHText>
     </PropertyGroup>
     <Message Text="Updating pyconfig.h" Condition="$(PyConfigHText.TrimEnd()) != $(OldPyConfigH.TrimEnd())" />
-    <WriteLinesToFile File="$(IntDir)pyconfig.h"
-                      Lines="$(PyConfigHText)"
-                      Overwrite="true"
-                      Condition="$(PyConfigHText.TrimEnd()) != $(OldPyConfigH.TrimEnd())" />
+    <WriteLinesToFile File="$(IntDir)pyconfig.h" Lines="$(PyConfigHText)" Overwrite="true" Condition="$(PyConfigHText.TrimEnd()) != $(OldPyConfigH.TrimEnd())" />
   </Target>
-
   <Target Name="_RebuildGetPath" AfterTargets="_RebuildFrozen" Condition="$(Configuration) != 'PGUpdate'">
-    <Exec Command='"$(TargetPath)" "%(GetPath.ModName)" "%(GetPath.FullPath)" "%(GetPath.IntFile)"' />
-
-    <Copy SourceFiles="%(GetPath.IntFile)"
-          DestinationFiles="%(GetPath.OutFile)"
-          Condition="!Exists(%(GetPath.OutFile)) or (Exists(%(GetPath.IntFile)) and '$([System.IO.File]::ReadAllText(%(GetPath.OutFile)).Replace(`&#x0D;&#x0A;`, `&#x0A;`))' != '$([System.IO.File]::ReadAllText(%(GetPath.IntFile)).Replace(`&#x0D;&#x0A;`, `&#x0A;`))')">
+    <Exec Command="&quot;$(TargetPath)&quot; &quot;%(GetPath.ModName)&quot; &quot;%(GetPath.FullPath)&quot; &quot;%(GetPath.IntFile)&quot;" />
+    <Copy SourceFiles="%(GetPath.IntFile)" DestinationFiles="%(GetPath.OutFile)" Condition="!Exists(%(GetPath.OutFile)) or (Exists(%(GetPath.IntFile)) and '$([System.IO.File]::ReadAllText(%(GetPath.OutFile)).Replace(`&#xD;&#xA;`, `&#xA;`))' != '$([System.IO.File]::ReadAllText(%(GetPath.IntFile)).Replace(`&#xD;&#xA;`, `&#xA;`))')">
       <Output TaskParameter="CopiedFiles" ItemName="_UpdatedGetPath" />
     </Copy>
-
-    <Message Text="Updated files: @(_UpdatedGetPath->'%(Filename)%(Extension)',', ')"
-             Condition="'@(_UpdatedGetPath)' != ''" Importance="high" />
+    <Message Text="Updated files: @(_UpdatedGetPath->'%(Filename)%(Extension)',', ')" Condition="'@(_UpdatedGetPath)' != ''" Importance="high" />
   </Target>
   <Target Name="_RebuildFrozen" AfterTargets="AfterBuild" Condition="$(Configuration) != 'PGUpdate'">
-    <Exec Command='"$(TargetPath)" "%(None.ModName)" "%(None.FullPath)" "%(None.IntFile)"' />
-
-    <Copy SourceFiles="%(None.IntFile)"
-          DestinationFiles="%(None.OutFile)"
-          Condition="!Exists(%(None.OutFile)) or (Exists(%(None.IntFile)) and '$([System.IO.File]::ReadAllText(%(None.OutFile)).Replace(`&#x0D;&#x0A;`, `&#x0A;`))' != '$([System.IO.File]::ReadAllText(%(None.IntFile)).Replace(`&#x0D;&#x0A;`, `&#x0A;`))')">
+    <Exec Command="&quot;$(TargetPath)&quot; &quot;%(None.ModName)&quot; &quot;%(None.FullPath)&quot; &quot;%(None.IntFile)&quot;" />
+    <Copy SourceFiles="%(None.IntFile)" DestinationFiles="%(None.OutFile)" Condition="!Exists(%(None.OutFile)) or (Exists(%(None.IntFile)) and '$([System.IO.File]::ReadAllText(%(None.OutFile)).Replace(`&#xD;&#xA;`, `&#xA;`))' != '$([System.IO.File]::ReadAllText(%(None.IntFile)).Replace(`&#xD;&#xA;`, `&#xA;`))')">
       <Output TaskParameter="CopiedFiles" ItemName="_Updated" />
     </Copy>
-
-    <Message Text="Updated files: @(_Updated->'%(Filename)%(Extension)',', ')"
-             Condition="'@(_Updated)' != ''" Importance="high" />
+    <Message Text="Updated files: @(_Updated->'%(Filename)%(Extension)',', ')" Condition="'@(_Updated)' != ''" Importance="high" />
   </Target>
   <Target Name="_CleanFrozen" BeforeTargets="CoreClean" Condition="$(Configuration) != 'PGUpdate'">
     <ItemGroup>
