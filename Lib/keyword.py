@@ -36,6 +36,7 @@ kwlist = [
     'for',
     'from',
     'global',
+    'goo',
     'if',
     'import',
     'in',

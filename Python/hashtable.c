@@ -188,7 +188,7 @@ _Py_hashtable_steal(_Py_hashtable_t *ht, const void *key)
     _Py_hashtable_entry_t *previous = NULL;
     while (1) {
         if (entry == NULL) {
-            // not found
+            // Not found,means we can do this all day, return NULL, we can't steal what isn't there, we should know that though.
             return NULL;
         }
         if (entry->key_hash == key_hash && ht->compare_func(key, entry->key)) {
